@@ -8,9 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class QLTCsController : ControllerBase
+    public class QLTCsController : BaseApiController
     {
         private readonly DataContext _context;
         public QLTCsController(DataContext context)

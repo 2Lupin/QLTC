@@ -3,14 +3,16 @@ using System;
 using API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace API.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20201122051640_Transactions")]
+    partial class Transactions
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,49 +44,18 @@ namespace API.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("AppQLTCId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("CardId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<DateTime>("Date_In")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("Date_Out")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("StationFrom")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("StationTo")
+                    b.Property<int>("TrasactionId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AppQLTCId");
 
                     b.ToTable("Transactions");
-                });
-
-            modelBuilder.Entity("API.Entities.AppUser", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<byte[]>("PasswordHash")
-                        .HasColumnType("BLOB");
-
-                    b.Property<byte[]>("PasswordSalt")
-                        .HasColumnType("BLOB");
-
-                    b.Property<string>("UserName")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("API.Entities.MRTLine1", b =>
@@ -206,18 +177,6 @@ namespace API.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("MRTLine2");
-                });
-
-            modelBuilder.Entity("API.Entities.AppTransactions", b =>
-                {
-                    b.HasOne("API.Entities.AppQLTC", null)
-                        .WithMany("Transactions")
-                        .HasForeignKey("AppQLTCId");
-                });
-
-            modelBuilder.Entity("API.Entities.AppQLTC", b =>
-                {
-                    b.Navigation("Transactions");
                 });
 #pragma warning restore 612, 618
         }
